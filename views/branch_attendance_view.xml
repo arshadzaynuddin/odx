@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="hr_attendance_branch_tree" model="ir.ui.view">
+        <field name="name">hr.attendance.branch.tree</field>
+        <field name="model">hr.attendance</field>
+        <field name="arch" type="xml">
+            <tree editable="top">
+                <field name="employee_id"/>
+                <field name="check_in" readonly="1"/>
+                <field name="check_out" readonly="1"/>
+                <button name="check_out_branch" string="Checkout" type="object" class="btn-danger"/>
+                <!--                <button name="check_out_branch" string="Checkout" type="object"  class="btn-danger"/>-->
+            </tree>
+        </field>
+    </record>
+
+
+
+     <record id="action_hr_attendance_branch" model="ir.actions.act_window">
+        <field name="name" >Branch Attendance</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.attendance</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{}</field>
+<!--          <field name="view_id" ref="hr_attendance_branch_tree" />-->
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Session!
+            </p>
+        </field>
+    </record>
+
+    <record id="hr_attendance.view_attendance_tree" model="ir.actions.act_window.view">
+        <field name="sequence">3</field>
+        <field name="view_mode">tree</field>
+        <field name="act_window_id" ref="hr_attendance.hr_attendance_action"/>
+        <field name="view_id" ref="hr_attendance.view_attendance_tree"/>
+    </record>
+
+
+    <menuitem id="menu_branch_attendance"
+              name="Branch Attendance"
+              action="action_hr_attendance_branch"
+              parent="hr_attendance.menu_hr_attendance_root"
+              sequence="11"/>
+    <!--        <menuitem id="menu_hr_attendance_view_attendances" name="Attendances" parent="menu_hr_attendance_root" sequence="10" groups="hr_attendance.group_hr_attendance_user" action="hr_attendance_action"/>-->
+
+</odoo>
